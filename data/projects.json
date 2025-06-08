@@ -1,0 +1,17 @@
+[
+  {
+    "title": "E-Commerce Platform",
+    "description": "A modern e-commerce site built with Next.js and Chakra UI.",
+    "link": "https://example.com/ecommerce"
+  },
+  {
+    "title": "Task Manager",
+    "description": "A dynamic task management app with real-time updates.",
+    "link": "https://example.com/taskmanager"
+  },
+  {
+    "title": "Portfolio Site",
+    "description": "A sleek portfolio with Framer Motion animations.",
+    "link": "https://example.com/portfolio"
+  }
+]
