@@ -1,17 +1,24 @@
 [
   {
+    "title": "AI Resume Builder",
+    "description": "An intelligent resume builder that adapts content based on job descriptions using NLP.",
+    "image": "/images/resume-builder.jpg",
+    "link": "https://resume-builder.demo",
+    "github": "https://github.com/username/resume-builder",
+    "category": "ai",
+    "techStack": ["Next.js", "TypeScript", "Python", "OpenAI", "PostgreSQL"],
+    "status": "completed",
+    "year": "2024"
+  },
+  {
     "title": "E-Commerce Platform",
-    "description": "A modern e-commerce site built with Next.js and Chakra UI.",
-    "link": "https://example.com/ecommerce"
-  },
-  {
-    "title": "Task Manager",
-    "description": "A dynamic task management app with real-time updates.",
-    "link": "https://example.com/taskmanager"
-  },
-  {
-    "title": "Portfolio Site",
-    "description": "A sleek portfolio with Framer Motion animations.",
-    "link": "https://example.com/portfolio"
+    "description": "Full-featured e-commerce platform with real-time inventory and payment processing.",
+    "image": "/images/ecommerce.jpg",
+    "link": "https://ecommerce.demo",
+    "github": "https://github.com/username/ecommerce",
+    "category": "django",
+    "techStack": ["Django", "PostgreSQL", "Redis", "Docker", "AWS"],
+    "status": "in-progress",
+    "year": "2024"
   }
 ]

@@ -13,6 +13,9 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import Profile from '../components/Profile';
+import About from './about/page';
+import Projects from './projects/page';
+import Contact from './contact/page';
 
 const MotionBox = motion(Box);
 
@@ -42,13 +45,10 @@ const Home: NextPage = () => {
 
   return (
     <Box>
-      {/* <Head>
-        <title>Ajay Saini - Portfolio</title>
-        <meta name="description" content="Portfolio of Your Name" />
-      </Head> */}
-
-      {/* Hero Section */}
       <Profile />
+      <About/>
+      <Projects/>
+      <Contact/>
     </Box>
   );
 };
