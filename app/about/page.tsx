@@ -36,6 +36,7 @@ import {
   FaReact
 } from 'react-icons/fa';
 import { 
+  SiReact,
   SiNextdotjs, 
   SiTypescript, 
   SiDjango, 
@@ -43,11 +44,11 @@ import {
   SiKubernetes,
   SiPostgresql,
   SiRedis,
-  SiAew,
   SiTerraform,
   SiGraphql,
   SiGit
 } from 'react-icons/si';
+import { FaAws } from "react-icons/fa";
 import { TbApi, TbBrandVscode } from 'react-icons/tb';
 import { MdSpeed, MdSecurity, MdStorage, MdDevices } from 'react-icons/md';
 
@@ -246,7 +247,7 @@ const About: NextPage = () => {
                     fontFamily: 'monospace',
                   }}
                 >
-                  I'm Ajay Saini, a senior software engineer specializing in full-stack development and AI systems. 
+                  I'm Ajay Saini, a software engineer specializing in full-stack development and AI systems. 
                   I architect enterprise-grade solutions using Python, Django, Next.js, and TypeScript — building 
                   robust systems that scale with precision.
                 </Highlight>
@@ -374,13 +375,14 @@ const About: NextPage = () => {
                     w="full"
                   >
                     {[
+                      { tech: 'React.js', icon: SiReact, color: colors.cream },
                       { tech: 'Next.js', icon: SiNextdotjs, color: colors.cream },
                       { tech: 'TypeScript', icon: SiTypescript, color: colors.accent },
                       { tech: 'Python', icon: FaPython, color: colors.code },
                       { tech: 'Django', icon: SiDjango, color: colors.terminal },
                       { tech: 'PostgreSQL', icon: SiPostgresql, color: colors.secondary },
                       { tech: 'Docker', icon: SiDocker, color: colors.secondary },
-                      { tech: 'AWS', icon: SiAew, color: colors.warning },
+                      { tech: 'AWS', icon: FaAws, color: colors.warning },
                       { tech: 'GraphQL', icon: SiGraphql, color: colors.code },
                     ].map((item) => (
                       <Flex
@@ -433,12 +435,13 @@ const About: NextPage = () => {
                   animate="animate"
                 >
                   {[
+                    { icon: SiReact, color: colors.cream, size: 24, delay: 0 },
                     { icon: SiNextdotjs, color: colors.cream, size: 24, delay: 0 },
                     { icon: FaPython, color: colors.code, size: 24, delay: 0.2 },
                     { icon: SiTypescript, color: colors.accent, size: 24, delay: 0.4 },
                     { icon: SiDjango, color: colors.terminal, size: 24, delay: 0.6 },
                     { icon: SiDocker, color: colors.secondary, size: 22, delay: 0.8 },
-                    { icon: SiAew, color: colors.warning, size: 22, delay: 1 },
+                    { icon: FaAws, color: colors.warning, size: 22, delay: 1 },
                   ].map((tech, idx) => (
                     <MotionBox
                       key={idx}
@@ -526,7 +529,7 @@ const About: NextPage = () => {
 
                       <Image
                         src="/me.png"
-                        alt="Ajay Saini - Senior Software Engineer"
+                        alt="Ajay Saini - Software Engineer"
                         position="absolute"
                         bottom={0}
                         right={0}
@@ -637,7 +640,7 @@ const About: NextPage = () => {
                   mt={2}
                   fontFamily="monospace"
                 >
-                  // Senior Software Engineer
+                  // Software Engineer
                 </Text>
               </MotionBox>
             </MotionBox>
@@ -666,7 +669,7 @@ const About: NextPage = () => {
               {[
                 { name: 'Docker', icon: SiDocker, color: colors.secondary },
                 { name: 'Kubernetes', icon: SiKubernetes, color: colors.accent },
-                { name: 'AWS', icon: SiAew, color: colors.warning },
+                { name: 'AWS', icon: FaAws, color: colors.warning },
                 { name: 'Terraform', icon: SiTerraform, color: colors.code },
                 { name: 'Redis', icon: SiRedis, color: colors.error },
                 { name: 'Git', icon: SiGit, color: colors.terminal },

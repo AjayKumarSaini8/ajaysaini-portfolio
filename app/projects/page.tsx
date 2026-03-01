@@ -29,6 +29,7 @@ import {
   FaBolt
 } from 'react-icons/fa';
 import { 
+  SiReact,
   SiNextdotjs, 
   SiTypescript, 
   SiPython, 
@@ -36,10 +37,10 @@ import {
   SiDocker,
   SiPostgresql,
   SiRedis,
-  SiAew,
   SiGraphql,
   SiJavascript
 } from 'react-icons/si';
+import { FaAws } from "react-icons/fa";
 import projects from '../../data/projects.json';
 import { Project } from '../../lib/types';
 
@@ -102,6 +103,7 @@ const Projects = () => {
 
   // Tech icon mapping
   const techIcons = {
+    'reactjs': SiReact,
     'nextjs': SiNextdotjs,
     'typescript': SiTypescript,
     'python': SiPython,
@@ -109,7 +111,7 @@ const Projects = () => {
     'docker': SiDocker,
     'postgresql': SiPostgresql,
     'redis': SiRedis,
-    'aws': SiAew,
+    'aws': FaAws,
     'graphql': SiGraphql,
     'javascript': SiJavascript,
     'ai': FaRobot,
@@ -127,6 +129,7 @@ const Projects = () => {
 
   const getTechColor = (tech: string) => {
     const techMap: Record<string, string> = {
+      'reactjs': colors.cream,
       'nextjs': colors.cream,
       'typescript': colors.accent,
       'python': colors.code,

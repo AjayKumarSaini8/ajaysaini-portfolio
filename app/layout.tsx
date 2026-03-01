@@ -1,7 +1,6 @@
-// layout.tsx - Update your layout.tsx
-import Nav from '../components/Nav';
-import { Providers } from './providers';
 import { ReactNode } from 'react';
+import { Providers } from './providers';
+import NavClient from '../components/NavClient';
 
 interface RootLayoutProps {
   children: ReactNode;
@@ -12,7 +11,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang="en">
       <body>
         <Providers>
-          <Nav />
+          <NavClient />
           {children}
         </Providers>
       </body>

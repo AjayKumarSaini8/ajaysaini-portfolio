@@ -35,13 +35,14 @@ import {
   FaDotCircle
 } from 'react-icons/fa';
 import { 
+  SiReact,
   SiNextdotjs, 
   SiPython, 
   SiTypescript,
   SiDjango,
   SiDocker,
-  SiAew
 } from 'react-icons/si';
+import { FaAws } from "react-icons/fa";
 import { MdSettings } from 'react-icons/md';
 import { useState, useEffect } from 'react';
 
@@ -138,14 +139,14 @@ const Nav = () => {
   const handleShare = () => {
     if (navigator.share) {
       navigator.share({
-        title: 'Ajay Saini | Senior Software Engineer',
+        title: 'Ajay Saini | Software Engineer',
         text: 'Check out my portfolio showcasing full-stack development and AI systems!',
         url: window.location.href,
       });
     } else {
       const shareLink = `${window.location.href}`;
       const shareText = 'Check out my portfolio showcasing full-stack development and AI systems!';
-      const shareSubject = 'Ajay Saini | Senior Software Engineer';
+      const shareSubject = 'Ajay Saini | Software Engineer';
       const mailToLink = `mailto:?subject=${encodeURIComponent(shareSubject)}&body=${encodeURIComponent(shareText + ' ' + shareLink)}`;
       window.open(mailToLink, '_blank');
     }
@@ -238,7 +239,7 @@ const Nav = () => {
     { icon: SiPython, label: 'Python', color: colors.code },
     { icon: SiDjango, label: 'Django', color: colors.terminal },
     { icon: SiDocker, label: 'Docker', color: colors.secondary },
-    { icon: SiAew, label: 'AWS', color: colors.warning },
+    { icon: FaAws, label: 'AWS', color: colors.warning },
   ];
 
   // Handle app click

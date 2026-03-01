@@ -1,56 +1,78 @@
 'use client';
 
-import {
-  Box,
-  Heading,
-  Text,
-  Button,
-  VStack,
-  ButtonProps,
-} from '@chakra-ui/react';
-import { motion } from 'framer-motion';
-import type { NextPage } from 'next';
-import Head from 'next/head';
-import Link from 'next/link';
-import Profile from '../components/Profile';
-import About from './about/page';
-import Projects from './projects/page';
-import Contact from './contact/page';
+import { useEffect, useState } from 'react';
+import { Box, Center, Spinner } from '@chakra-ui/react';
+import dynamic from 'next/dynamic';
 
-const MotionBox = motion(Box);
+const SectionLoader = () => (
+  <Center py={10}>
+    <Spinner size="sm" speed="0.8s" />
+  </Center>
+);
 
-interface CustomButtonProps {
-  href: string;
-  children: React.ReactNode;
-  buttonProps?: ButtonProps;
-}
+const Profile = dynamic(() => import('../components/Profile'), {
+  ssr: false,
+  loading: SectionLoader,
+});
 
-const CustomLinkButton = ({
-  href,
-  children,
-  buttonProps,
-}: CustomButtonProps) => {
-  return (
-    <Button as={Link} href={href} {...buttonProps}>
-      {children}
-    </Button>
-  );
+const About = dynamic(() => import('./about/page'), {
+  ssr: false,
+  loading: SectionLoader,
+});
+
+const Projects = dynamic(() => import('./projects/page'), {
+  ssr: false,
+  loading: SectionLoader,
+});
+
+const Contact = dynamic(() => import('./contact/page'), {
+  ssr: false,
+  loading: SectionLoader,
+});
+
+type IdleWindow = Window & {
+  requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number;
+  cancelIdleCallback?: (id: number) => void;
 };
 
-const Home: NextPage = () => {
-  const fadeIn = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
-  };
+export default function Home() {
+  const [showHeavySections, setShowHeavySections] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    const idleWindow = window as IdleWindow;
+
+    const loadSections = () => {
+      if (!cancelled) setShowHeavySections(true);
+    };
+
+    if (idleWindow.requestIdleCallback) {
+      const idleId = idleWindow.requestIdleCallback(loadSections, { timeout: 2000 });
+      return () => {
+        cancelled = true;
+        idleWindow.cancelIdleCallback?.(idleId);
+      };
+    }
+
+    const timeoutId = setTimeout(loadSections, 1200);
+    return () => {
+      cancelled = true;
+      clearTimeout(timeoutId);
+    };
+  }, []);
 
   return (
     <Box>
       <Profile />
-      <About/>
-      <Projects/>
-      <Contact/>
+      {showHeavySections ? (
+        <>
+          <About />
+          <Projects />
+          <Contact />
+        </>
+      ) : (
+        <SectionLoader />
+      )}
     </Box>
   );
-};
-
-export default Home;
+}
