@@ -252,7 +252,7 @@ const Profile = () => {
                 >
                   <Avatar
                     size="full"
-                    src="/me.png"
+                    name="Ajay Saini"
                     border="3px solid"
                     borderColor={colors.charcoal}
                     borderRadius="full"
@@ -502,10 +502,10 @@ const Profile = () => {
                       CURRENT ROLE
                     </Text>
                     <Text color={colors.secondary} fontSize="md" fontWeight="bold">
-                      Frontend Developer @ Sapat International
+                      Software Developer @ Sapat International
                     </Text>
                     <Text fontSize="xs" color={`${colors.cream}AA`} fontFamily="monospace">
-                      // Building scalable AI infrastructure
+                      // Building scalable Products and AI solutions for global clients. Focused on full-stack development, cloud architecture, and performance optimization.
                     </Text>
                   </VStack>
                 </Flex>

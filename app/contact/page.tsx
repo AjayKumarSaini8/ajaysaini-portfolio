@@ -102,8 +102,18 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = (await response.json()) as { error?: string };
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to send message.');
+      }
       
       toast({
         title: 'Message Sent!',
@@ -117,9 +127,14 @@ const Contact = () => {
       // Reset form
       setFormData({ name: '', email: '', message: '' });
     } catch (error) {
+      const description =
+        error instanceof Error
+          ? error.message
+          : 'Failed to send message. Please try again.';
+
       toast({
         title: 'Error',
-        description: 'Failed to send message. Please try again.',
+        description,
         status: 'error',
         duration: 5000,
         isClosable: true,

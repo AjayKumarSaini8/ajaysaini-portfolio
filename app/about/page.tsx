@@ -10,7 +10,6 @@ import {
   HStack,
   Tag,
   TagLabel,
-  Image,
   Highlight,
   Badge,
   Flex,
@@ -527,19 +526,28 @@ const About: NextPage = () => {
                         <Text color={colors.terminal}>{'}'};</Text>
                       </Code>
 
-                      <Image
-                        src="/me.png"
-                        alt="Ajay Saini - Software Engineer"
+                      <Flex
                         position="absolute"
                         bottom={0}
                         right={0}
                         w="60%"
                         h="60%"
-                        objectFit="cover"
                         borderRadius="16px 0 21px 0"
-                        filter="grayscale(30%) contrast(120%)"
-                        opacity={0.9}
-                      />
+                        bg={`linear-gradient(145deg, ${colors.primary}E6, ${colors.charcoal}E6)`}
+                        borderTop={`1px solid ${colors.secondary}30`}
+                        borderLeft={`1px solid ${colors.secondary}30`}
+                        align="center"
+                        justify="center"
+                      >
+                        <Text
+                          color={colors.secondary}
+                          fontFamily="monospace"
+                          fontWeight="bold"
+                          letterSpacing="wide"
+                        >
+                          AJAY_SAINI
+                        </Text>
+                      </Flex>
                     </VStack>
                   </Box>
                 </Box>

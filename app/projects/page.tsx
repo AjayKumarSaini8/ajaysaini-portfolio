@@ -361,7 +361,7 @@ const ProjectCard = ({
           {project.image ? (
             <Box
               as="img"
-              src={project.image}
+              // src={project.image}
               alt={project.title}
               objectFit="cover"
               w="full"
