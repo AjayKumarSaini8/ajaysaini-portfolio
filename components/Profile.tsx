@@ -26,10 +26,9 @@ import {
   FaTerminal,
   FaRobot,
   FaCode,
-  FaServer,
-  FaDatabase,
-  FaCloud,
-  FaMedal
+  FaMedal,
+  FaCogs,
+  FaAws
 } from 'react-icons/fa';
 import {
   SiNextdotjs,
@@ -37,8 +36,9 @@ import {
   SiPython,
   SiDjango,
   SiDocker,
-  SiAew,
-  SiPostgresql
+  SiPostgresql,
+  SiGraphql,
+  SiRedis
 } from 'react-icons/si';
 import { MdVerified, MdSpeed } from 'react-icons/md';
 
@@ -61,9 +61,10 @@ const Profile = () => {
 
   // Responsive values
   const isMobile = useBreakpointValue({ base: true, md: false });
-  const isTablet = useBreakpointValue({ base: false, md: true, lg: false });
   const avatarSize = useBreakpointValue({ base: '160px', sm: '180px', md: '200px', lg: '220px' });
   const iconSize = useBreakpointValue({ base: '14px', sm: '16px', md: '18px' });
+  const profileImageSrc = '/images/profile/ajay-saini.png';
+  const orbitRadius = isMobile ? 42 : 50;
 
   const container = {
     hidden: { opacity: 0 },
@@ -96,30 +97,30 @@ const Profile = () => {
     },
   };
 
-  // Simplified tech icons for orbit
-  const techIcons = [
-    { icon: SiNextdotjs, color: colors.cream, delay: 0 },
-    { icon: SiPython, color: colors.code, delay: 0.2 },
-    { icon: SiTypescript, color: colors.accent, delay: 0.4 },
-    { icon: SiDjango, color: colors.terminal, delay: 0.6 },
-    { icon: SiDocker, color: colors.secondary, delay: 0.8 },
-    { icon: SiAew, color: colors.warning, delay: 1.0 },
+  // Single source of truth for displayed technologies
+  const techStack = [
+    { name: 'Next.js', icon: SiNextdotjs, color: colors.cream },
+    { name: 'TypeScript', icon: SiTypescript, color: colors.accent },
+    { name: 'Python', icon: SiPython, color: colors.code },
+    { name: 'Django', icon: SiDjango, color: colors.terminal },
+    { name: 'Docker', icon: SiDocker, color: colors.secondary },
+    { name: 'AWS', icon: FaAws, color: colors.warning },
+    { name: 'PostgreSQL', icon: SiPostgresql, color: colors.secondary },
+    { name: 'GraphQL', icon: SiGraphql, color: colors.code },
+    { name: 'Redis', icon: SiRedis, color: colors.terminal },
+    { name: 'CI/CD', icon: FaCogs, color: colors.accent },
   ];
 
-  // Core tech stack
-  const coreStack = [
-    'Next.js',
-    'React.js',
-    'TypeScript',
-    'Python',
-    'Django',
-    'PostgreSQL',
-    'Docker',
-    'AWS',
-    'GraphQL',
-    'Redis',
-    'CI/CD'
-  ];
+  const orbitIcons = techStack
+    .filter((tech) => tech.icon && tech.color)
+    .slice(0, 6)
+    .map((tech, index) => ({
+      icon: tech.icon!,
+      color: tech.color!,
+      delay: index * 0.15,
+    }));
+
+  const coreStack = techStack.map((tech) => tech.name);
 
   // Social links
   const socialLinks = [
@@ -200,45 +201,43 @@ const Profile = () => {
             {/* Animated Avatar */}
             <MotionBox variants={item} position="relative">
               <Box position="relative" w={avatarSize} h={avatarSize} mx="auto">
-                {/* Tech Orbit - Only desktop */}
-                {!isMobile && (
-                  <MotionBox
-                    position="absolute"
-                    inset="-10px"
-                    borderRadius="50%"
-                    border={`1px dashed ${colors.secondary}20`}
-                    animate={{
-                      rotate: 360,
-                    }}
-                    transition={{
-                      duration: 30,
-                      repeat: Infinity,
-                      ease: 'linear',
-                    }}
-                  >
-                    {techIcons.map((tech, idx) => (
-                      <MotionBox
-                        key={idx}
-                        position="absolute"
-                        top={`${50 + 50 * Math.sin(idx * Math.PI / 3)}%`}
-                        left={`${50 + 50 * Math.cos(idx * Math.PI / 3)}%`}
-                        transform="translate(-50%, -50%)"
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        transition={{ delay: tech.delay }}
+                {/* Tech Orbit */}
+                <MotionBox
+                  position="absolute"
+                  inset={{ base: '-6px', md: '-10px' }}
+                  borderRadius="50%"
+                  border={`1px dashed ${colors.secondary}20`}
+                  animate={{
+                    rotate: 360,
+                  }}
+                  transition={{
+                    duration: 30,
+                    repeat: Infinity,
+                    ease: 'linear',
+                  }}
+                >
+                  {orbitIcons.map((tech, idx) => (
+                    <MotionBox
+                      key={idx}
+                      position="absolute"
+                      top={`${50 + orbitRadius * Math.sin(idx * Math.PI / 3)}%`}
+                      left={`${50 + orbitRadius * Math.cos(idx * Math.PI / 3)}%`}
+                      transform="translate(-50%, -50%)"
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      transition={{ delay: tech.delay }}
+                    >
+                      <Box
+                        p={{ base: 1.5, md: 2 }}
+                        bg={`linear-gradient(135deg, ${colors.charcoal}, ${colors.primary})`}
+                        borderRadius="md"
+                        border={`1px solid ${tech.color}30`}
                       >
-                        <Box
-                          p={2}
-                          bg={`linear-gradient(135deg, ${colors.charcoal}, ${colors.primary})`}
-                          borderRadius="md"
-                          border={`1px solid ${tech.color}30`}
-                        >
-                          <tech.icon size={isMobile ? "16px" : "18px"} color={tech.color} />
-                        </Box>
-                      </MotionBox>
-                    ))}
-                  </MotionBox>
-                )}
+                        <tech.icon size={isMobile ? "14px" : "18px"} color={tech.color} />
+                      </Box>
+                    </MotionBox>
+                  ))}
+                </MotionBox>
 
                 {/* Avatar */}
                 <Box
@@ -253,6 +252,7 @@ const Profile = () => {
                   <Avatar
                     size="full"
                     name="Ajay Saini"
+                    src={profileImageSrc}
                     border="3px solid"
                     borderColor={colors.charcoal}
                     borderRadius="full"
@@ -260,14 +260,14 @@ const Profile = () => {
                   />
                 </Box>
 
-                {/* Floating Achievement Card 1 - Right Top */}
+                {/* Floating Achievement Card 1 - Left Top */}
                 <MotionBox
                   position="absolute"
-                  top="20%"
-                  left={{ base: '15px', md: '25px', lg: '35px' }}
+                  top={{ base: '-20px', sm: '3px', md: '4%' }}
+                  left={{ base: '-80px', sm: '-50px', md: '-106px' }}
                   rounded="lg"
-                  px={{ base: 3, md: 4 }}
-                  py={2}
+                  px={{ base: 2.5, md: 4 }}
+                  py={{ base: 1.5, md: 2 }}
                   bg={`linear-gradient(135deg, ${colors.primary}EE, ${colors.charcoal}EE)`}
                   borderWidth="1px"
                   borderColor={`${colors.secondary}40`}
@@ -283,8 +283,7 @@ const Profile = () => {
                     },
                   }}
                   zIndex={2}
-                  w={{ base: '130px', md: '150px' }}
-                  display={{ base: 'none', sm: 'block' }} // Hide on mobile
+                  w={{ base: '112px', sm: '128px', md: '150px' }}
                 >
                   <HStack spacing={2}>
                     <FaMedal color={colors.secondary} size={isMobile ? "14px" : "16px"} />
@@ -305,56 +304,6 @@ const Profile = () => {
                         fontFamily="monospace"
                       >
                         Enterprise Scale
-                      </Text>
-                    </VStack>
-                  </HStack>
-                </MotionBox>
-
-                {/* Floating Achievement Card 2 - Right Bottom */}
-                <MotionBox
-                  position="absolute"
-                  bottom="30%"
-                  right={{ base: '-35px', md: '-45px', lg: '-55px' }}
-                  rounded="lg"
-                  px={{ base: 3, md: 4 }}
-                  py={2}
-                  bg={`linear-gradient(135deg, ${colors.accent}EE, ${colors.charcoal}EE)`}
-                  borderWidth="1px"
-                  borderColor={`${colors.accent}40`}
-                  backdropFilter="blur(12px)"
-                  boxShadow={`0 8px 24px rgba(0,0,0,0.4), 0 0 0 1px ${colors.accent}15`}
-                  animate={{
-                    y: [0, 8, 0],
-                    x: [0, -2, 0],
-                    transition: {
-                      duration: 6,
-                      repeat: Infinity,
-                      ease: 'easeInOut',
-                    },
-                  }}
-                  zIndex={2}
-                  w={{ base: '120px', md: '140px' }}
-                  display={{ base: 'none', sm: 'block' }} // Hide on mobile
-                >
-                  <HStack spacing={2}>
-                    <FaCode color={colors.accent} size={isMobile ? "14px" : "16px"} />
-                    <VStack align="flex-start" spacing={0}>
-                      <Text
-                        color={colors.cream}
-                        fontSize={{ base: '2xs', md: 'xs' }}
-                        fontWeight="medium"
-                        letterSpacing="wide"
-                        fontFamily="monospace"
-                      >
-                        CRAFTSMANSHIP
-                      </Text>
-                      <Text
-                        color={colors.accent}
-                        fontSize={{ base: 'xs', md: 'sm' }}
-                        fontWeight="bold"
-                        fontFamily="monospace"
-                      >
-                        Clean Code
                       </Text>
                     </VStack>
                   </HStack>
@@ -511,37 +460,35 @@ const Profile = () => {
                 </Flex>
               </MotionBox>
 
-              {/* Tech Stack - Desktop */}
-              {!isMobile && (
-                <MotionBox variants={item} w="full">
-                  <Text fontSize="sm" color={`${colors.secondary}CC`} mb={2} fontWeight="500">
-                    TECH STACK
-                  </Text>
-                  <Flex gap={2} wrap="wrap">
-                    {coreStack.map((tech) => (
-                      <Badge
-                        key={tech}
-                        px={3}
-                        py={1.5}
-                        bg={`linear-gradient(135deg, ${colors.primary}30, ${colors.charcoal}30)`}
-                        color={colors.cream}
-                        fontSize="xs"
-                        fontWeight="500"
-                        fontFamily="monospace"
-                        borderRadius="md"
-                        border={`1px solid ${colors.secondary}15`}
-                        _hover={{
-                          borderColor: colors.secondary,
-                          transform: 'translateY(-1px)',
-                        }}
-                        transition="all 0.2s ease"
-                      >
-                        {tech}
-                      </Badge>
-                    ))}
-                  </Flex>
-                </MotionBox>
-              )}
+              {/* Tech Stack */}
+              <MotionBox variants={item} w="full">
+                <Text fontSize="sm" color={`${colors.secondary}CC`} mb={2} fontWeight="500">
+                  TECH STACK
+                </Text>
+                <Flex gap={2} wrap="wrap">
+                  {coreStack.map((tech) => (
+                    <Badge
+                      key={tech}
+                      px={3}
+                      py={1.5}
+                      bg={`linear-gradient(135deg, ${colors.primary}30, ${colors.charcoal}30)`}
+                      color={colors.cream}
+                      fontSize="xs"
+                      fontWeight="500"
+                      fontFamily="monospace"
+                      borderRadius="md"
+                      border={`1px solid ${colors.secondary}15`}
+                      _hover={{
+                        borderColor: colors.secondary,
+                        transform: 'translateY(-1px)',
+                      }}
+                      transition="all 0.2s ease"
+                    >
+                      {tech}
+                    </Badge>
+                  ))}
+                </Flex>
+              </MotionBox>
 
               {/* Social Links */}
               <MotionBox variants={item} w="full">

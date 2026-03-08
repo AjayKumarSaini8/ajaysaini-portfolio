@@ -33,8 +33,9 @@ import {
   FaTwitter,
   FaCode,
   FaRobot,
+  FaAws,
 } from 'react-icons/fa';
-import { SiNextdotjs, SiTypescript, SiPython } from 'react-icons/si';
+import { SiNextdotjs, SiTypescript, SiPython, SiPostgresql, SiDjango } from 'react-icons/si';
 import { MdEmail, MdMessage, MdPerson, MdSend } from 'react-icons/md';
 
 const MotionBox = motion(Box);
@@ -595,9 +596,9 @@ const Contact = () => {
                         { tech: 'Next.js', icon: SiNextdotjs, color: colors.cream },
                         { tech: 'TypeScript', icon: SiTypescript, color: colors.accent },
                         { tech: 'Python', icon: SiPython, color: colors.code },
-                        { tech: 'Django', color: colors.terminal },
-                        { tech: 'PostgreSQL', color: colors.secondary },
-                        { tech: 'AWS', color: colors.warning },
+                        { tech: 'Django', icon: SiDjango, color: colors.terminal },
+                        { tech: 'PostgreSQL', icon: SiPostgresql, color: colors.secondary },
+                        { tech: 'AWS', icon: FaAws, color: colors.warning },
                       ].map((item) => (
                         <Badge
                           key={item.tech}
