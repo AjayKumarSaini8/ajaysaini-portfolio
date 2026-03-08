@@ -111,14 +111,11 @@ const Profile = () => {
     { name: 'CI/CD', icon: FaCogs, color: colors.accent },
   ];
 
-  const orbitIcons = techStack
-    .filter((tech) => tech.icon && tech.color)
-    .slice(0, 6)
-    .map((tech, index) => ({
-      icon: tech.icon!,
-      color: tech.color!,
-      delay: index * 0.15,
-    }));
+  const orbitIcons = techStack.slice(0, 6).map((tech, index) => ({
+    icon: tech.icon,
+    color: tech.color,
+    delay: index * 0.15,
+  }));
 
   const coreStack = techStack.map((tech) => tech.name);
 
